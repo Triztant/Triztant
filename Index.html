@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Box Layout with GIFs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Fraunces', serif;
+            overflow: hidden; /* Ensures no scrollbars on the main document */
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .left-box {
+            width: 75%;
+            overflow-y: auto; /* Enable scrolling within the box */
+            padding: 40px;
+            background-color: #eff7ff;
+            position: relative; /* Required for pseudo-elements */
+        }
+        /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+        .left-box::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for Firefox */
+        .left-box {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        .right-box {
+            width: 25%;
+            background-color: #eff7ff;
+            padding: 20px;
+        }
+        .left-box h1 {
+            margin: 10px 0;
+            font-size: 4em;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.2;
+            text-align: left;
+            letter-spacing: -5px; /* Adjust letter spacing using px */
+        }
+        .left-box h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            line-height: 1.5;
+            text-decoration: none;
+            letter-spacing: -1px; /* Adjust letter spacing using em */
+            text-align: left;
+            margin-left: 10px;
+            margin-top: 30px; /* Add more space above the h2 */
+            margin-bottom: -10px
+            
+        }
+        .left-box p {
+            margin: 10px ;
+        
+            font-size: 1em;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.6;
+            letter-spacing: -0.5px; /* Adjust letter spacing using em */
+            text-align: left;
+        
+        }
+        /* Default styling for all images */
+
+        .left-box img {
+            max-width: 100%;
+            height: auto;
+            margin: 5px 0;
+            display: block; /* Centers the image */
+        }
+        /* Custom styles for specific GIFs */
+        .gif-small {
+            width: 750%; /* Small size GIF */
+            margin: 3px; /* Margin between GIFs */
+        }
+        .gif-medium {
+            width: 33%; /* Medium size GIF */
+            margin: 5px auto;
+        }
+        .gif-large {
+            width: 70%; /* Large size GIF */
+            margin: 5px auto;
+        }
+        /* Flex container to align specific GIFs and text side by side */
+        .flex-row {
+            display: flex;
+            justify-content: space-between; /* Distribute space between elements */
+            align-items: center; /* Center align items vertically */
+        }
+        .text-next-to-gif {
+            flex: 1; /* Allow the text to take up remaining space */
+            margin: 0 10px; /* Add space around text */
+        }
+        .flex-item {
+            flex: 1 1 100%; /* Grow, shrink, basis width (48% to fit two per row) */
+            box-sizing: border-box; /* Include padding and border in size */
+        }
+        /* Video styling */
+        video {
+            max-width: 100%;
+          
+            height: auto;
+            border-radius: 0px; /* Optional: Add rounded corners */
+            box-shadow: 0px rgba(0, 0, 0, );  
+            pointer-events: none;
+        }
+        .video-description {
+            margin-top: 10px; /* Space between video and text */
+            text-align: center; /* Center align the text */
+            font-weight: 600; /* Make the text bold */
+            font-style: italic; /* Make the text italic */
+        }
+        
+        
+        
+        /* Custom classes for Fraunces font */
+        .fraunces-thin {
+            font-family: "Fraunces", serif;
+            font-weight: 100;
+            font-style: normal;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-extralight {
+            font-family: "Fraunces", serif;
+            font-weight: 200;
+            font-style: normal;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-light {
+            font-family: "Fraunces", serif;
+            font-weight: 300;
+            font-style: normal;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-regular {
+            font-family: "Fraunces", serif;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-medium {
+            font-family: "Fraunces", serif;
+            font-weight: 500;
+            font-style: normal;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-semibold {
+            font-family: "Fraunces", serif;
+            font-weight: 600;
+            font-style: normal;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-bold {
+            font-family: "Fraunces", serif;
+            font-weight: 700;
+            font-style: normal;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-thin-italic {
+            font-family: "Fraunces", serif;
+            font-weight: 100;
+            font-style: italic;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-extralight-italic {
+            font-family: "Fraunces", serif;
+            font-weight: 200;
+            font-style: italic;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-light-italic {
+            font-family: "Fraunces", serif;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-regular-italic {
+            font-family: "Fraunces", serif;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-medium-italic {
+            font-family: "Fraunces", serif;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-semibold-italic {
+            font-family: "Fraunces", serif;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+        .fraunces-bold-italic {
+            font-family: "Fraunces", serif;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: -0.1px; /* Adjust letter spacing */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-box">
+            <h1 class="fraunces-bold">Casper Tristan Read</h1>
+            <h2 class="fraunces-semibold">La Haine</h2>
+            <p class="text-next-to-gif fraunces-regular">Film to publication project based on the french Film "La Haine"</p>
+            <div class="flex-row">
+                <img src="ASSESTS/LaHaineMain.gif" alt="GIF for Subtitle 1" class="gif-large">
+                
+            </div>
+            <img src="ASSESTS/LaHaineSecond.gif" alt="GIF for Subtitle 2" class="gif-small">
+
+            <h2 class="fraunces-semibold">Climate Energy</h2>
+            <p class="text-next-to-gif fraunces-regular">Film to publication project based on the french Film "La Haine"</p>
+            <div class="flex-row">
+                <img src="ASSESTS/ClimateMain.gif" alt="GIF for Subtitle 3" class="gif-large">
+                
+                <img src="ASSESTS/ClimateSecond.gif" alt="GIF for Subtitle 4" class="gif-medium">
+            </div>
+            
+
+            <h2 class="fraunces-semibold">Furniture</h2>
+            <p class="text-next-to-gif fraunces-regular">Film to publication project based on the french Film "La Haine"</p>
+            <img src="ASSESTS/Furniture.gif" alt="GIF for Subtitle 5" class="gif-large">
+            <p class="fraunces-regular">Content for subtitle 3...</p>
+
+            <h2 class="fraunces-semibold">Subtitle 4</h2>
+            <p class="text-next-to-gif fraunces-regular">Film to publication project based on the french Film "La Haine"</p>
+            <img src="path-to-gif-6.gif" alt="GIF for Subtitle 6" class="gif-large">
+            <p class="fraunces-regular">Content for subtitle 4...</p>
+        </div>
+        <div class="right-box">
+            <video autoplay muted loop>
+                <source src="ASSESTS/Video.MOV" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="video-description">This website was Fully coded in Portugal</p>
+        </div>
+    </div>
+</body>
+</html>
