@@ -111,46 +111,23 @@
             flex: 1 1 100%; /* Grow, shrink, basis width (48% to fit two per row) */
             box-sizing: border-box; /* Include padding and border in size */
         }
-        /* Video styling */
-        video {
-            max-width: 50%;
-          
-            height: auto;
-            border-radius: 0px; /* Optional: Add rounded corners */
-            box-shadow: 0px rgba(0, 0, 0, );  
-            pointer-events: none;
-        }
-        .video-description {
-            margin-top: 10px; /* Space between video and text */
-            text-align: left; /* Center align the text */
-            font-weight: 600; /* Make the text bold */
-            font-style: italic; /* Make the text italic */
-        }/* Responsive styles for smaller screens */
-@media (max-width: 768px) {
-    /* Styles for tablets */
-    .video {
-        max-width: 80%; /* Reduce video width */
-    }
+       .right-box {
+    width: 25%;
+    background-color: #eff7ff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-@media (max-width: 480px) {
-    /* Styles for phones */
-    .container {
-        flex-direction: column; /* Stack boxes vertically */
-        height: auto; /* Allow flexible height */
-    }
-    .right-box {
-        width: 100%; /* Make boxes full-width */
-        padding: 10px; /* Adjust padding for smaller screens */
-    }
-    .video {
-        max-width: 100%; /* Make video full-width */
-        height: auto; /* Maintain aspect ratio */
-    }
+.video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    pointer-events: none; /* Ensure no interaction */
 }
-        
-        
-        
         /* Custom classes for Fraunces font */
         .fraunces-thin {
             font-family: "Fraunces", serif;
@@ -271,7 +248,7 @@ Premftbl"</p>
             
          </div>   
         <div class="right-box">
-    <video class="video" autoplay muted loop playsinline>
+    <video class="video"  muted autoplay loop playsinline>
         <source src="Video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
