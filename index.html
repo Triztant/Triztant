@@ -125,7 +125,29 @@
             text-align: left; /* Center align the text */
             font-weight: 600; /* Make the text bold */
             font-style: italic; /* Make the text italic */
-        }
+        }/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    /* Styles for tablets */
+    .video {
+        max-width: 80%; /* Reduce video width */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Styles for phones */
+    .container {
+        flex-direction: column; /* Stack boxes vertically */
+        height: auto; /* Allow flexible height */
+    }
+    .right-box {
+        width: 100%; /* Make boxes full-width */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+    .video {
+        max-width: 100%; /* Make video full-width */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
         
         
         
@@ -248,14 +270,13 @@ Premftbl"</p>
              <img src="GIFPrem.gif" alt="GIF for Subtitle 6" class="gif-Xlarge">
             
             
-        </div>
         <div class="right-box">
-            <video autoplay muted loop>
-                <source src="Video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <p class="video-description">This website was Fully coded in Portugal (by me) </p>
-        </div>
+    <video class="video" autoplay muted loop playsinline>
+        <source src="Video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <p class="video-description">This website was fully coded in Portugal</p>
+</div>
     </div>
 </body>
 </html>
