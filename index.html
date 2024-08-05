@@ -115,7 +115,7 @@
     width: 25%;
     background-color: #eff7ff;
     padding: 20px;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensures padding is included in width/height calculations */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,9 +124,43 @@
 .video {
     max-width: 100%;
     height: auto;
-    border-radius: 0px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    pointer-events: none; /* Ensure no interaction */
+    border-radius: 0px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    pointer-events: none; /* Disable interaction with the video */
+}
+
+.video-description {
+    margin-top: 10px; /* Space between video and text */
+    text-align: center; /* Center align the text */
+    font-weight: 600; /* Make the text bold */
+    font-style: italic; /* Make the text italic */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    /* Styles for tablets */
+    .left-box h1 {
+        font-size: 3em; /* Reduce font size for h1 */
+    }
+    .left-box h2 {
+        font-size: 1.2em; /* Reduce font size for h2 */
+    }
+    .left-box p {
+        font-size: 0.9em; /* Reduce font size for paragraphs */
+    }
+    .video {
+        max-width: 80%; /* Reduce video width */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Styles for phones */
+    .container {
+        flex-direction: column; /* Stack boxes vertically */
+        height: auto; /* Allow flexible height */
+    }
+    .left-box, .right-box {
+        width: 100%; /* Make
 }
         /* Custom classes for Fraunces font */
         .fraunces-thin {
@@ -249,10 +283,10 @@ Premftbl"</p>
          </div>   
         <div class="right-box">
     <video class="video" autoplay muted loop playsinline>
-        <source src="Video.mp4" type="video/mp4">
+        <source src="Video.mp4" type="mp4">
         Your browser does not support the video tag.
     </video>
-    <p class="video-description">This website was fully coded in Portugal (by Me)</p>
+    <p class="video-description">This website was fully coded in Portugal (by Me!)</p>
 </div>
     </div>
 </body>
