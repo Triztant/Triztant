@@ -1,257 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><!-- Set the title for the tab -->
-    <title>Casper Tristan</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <style>
+    #custom-cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1000;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+    @font-face {
+      font-family: 'Affairs Regular';
+      src: url('font/AffairsTest-Regular.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Affairs Italic';
+      src: url('font/AffairsTest-Italic.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Affairs Mono';
+      src: url('font/AffairsTest-Mono.otf') format('opentype');
+    }
+    .top-bar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100%;
+      height: 40px;
+      background: transparent;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding-left: 25px;
+      font-family: 'Affairs Mono', sans-serif;
+      font-size: 14px;
+      z-index: 10;
+      mix-blend-mode: difference;
+    }
+    .top-bar a {
+      color: white;
+      text-decoration: underline;
+      margin-left: 15px; /* reduce spacing between links */
+    }
+    .top-bar a:hover {
+      color: rgb(4, 4, 245);
+      text-decoration: underline;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: whitesmoke; /* yellow background */
+      font-family: 'Affairs Regular', sans-serif;
+      cursor: none;
+    }
+    #portfolio {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100%;
+      background-color: transparent;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2; /* stays below top bar */
+      pointer-events: none;
+    }
+    .text-area {
+      width: 200px;
+      margin-right: 20px;
+      font-family: 'Affairs Regular', sans-serif;
+      
+      flex-shrink: 0;
+    }
+    .image-columns {
+      display: flex;
+      flex: 1;
+      gap: 20px;
+      height: 100%;
+    }
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    .column img {
+      width: 100%;
+      border-radius: 0;
+      border: none;
+      object-fit: cover;
+    }
 
-    <!-- Link to the favicon -->
-    <link rel="icon" type="image/png" href="icon1.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casper Tristan</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Fraunces', serif;
-            overflow: hidden; /* Ensures no scrollbars on the main document */
-        }
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-        .left-box {
-            width: 75%;
-            overflow-y: auto; /* Enable scrolling within the box */
-            padding: 40px;
-            background-color: #eff7ff;
-            position: relative; /* Required for pseudo-elements */
-        }
-        /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
-        .left-box::-webkit-scrollbar {
-            display: none;
-        }
-        /* Hide scrollbar for Firefox */
-        .left-box {
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
-        }
-        .right-box {
-            width: 25%;
-            background-color: #eff7ff;
-            padding: 20px;
-        }
-        .left-box h1 {
-            margin: 10px 0;
-            font-size: 4em;
-            font-weight: 400;
-            font-style: italic;
-            line-height: 1.2;
-            text-align: left;
-            letter-spacing: -5px; /* Adjust letter spacing using px */
-        }
-        .left-box h2 {
-            font-size: 1.5em;
-            font-weight: 600;
-            line-height: 1.5;
-            text-decoration: none;
-            letter-spacing: -1px; /* Adjust letter spacing using em */
-            text-align: left;
-            margin-left: 10px;
-            margin-top: 30px; /* Add more space above the h2 */
-            margin-bottom: -10px
-            
-        }
-        .left-box p {
-            margin: 10px ;
-        
-            font-size: 1em;
-            font-weight: 400;
-            font-style: italic;
-            line-height: 1.6;
-            letter-spacing: -0.5px; /* Adjust letter spacing using em */
-            text-align: left;
-        
-        }
-        /* Default styling for all images */
-
-        .left-box img {
-            max-width: 100%;
-            height: auto;
-            margin: 5px 0;
-            display: block; /* Centers the image */
-        }
-        /* Custom styles for specific GIFs */
-        .gif-small {
-            width: 720%; /* Small size GIF */
-            margin: 3px; /* Margin between GIFs */
-        }
-        .gif-medium {
-            width: 33%; /* Medium size GIF */
-            margin: 5px auto;
-        }
-        .gif-large {
-            width: 70%; /* Large size GIF */
-            margin: 5px auto;
-         }
-        
-        
-        /* Flex container to align specific GIFs and text side by side */
-        .flex-row {
-            display: flex;
-            justify-content: space-between; /* Distribute space between elements */
-            align-items: center; /* Center align items vertically */
-        }
-        .text-next-to-gif {
-            flex: 1; /* Allow the text to take up remaining space */
-            margin: 0 10px; /* Add space around text */
-        }
-        .flex-item {
-            flex: 1 1 100%; /* Grow, shrink, basis width (48% to fit two per row) */
-            box-sizing: border-box; /* Include padding and border in size */
-        }
-       .right-box {
-    width: 25%;
-    background-color: #eff7ff;
-    padding: 20px;
-    box-sizing: border-box; /* Ensures padding is included in width/height calculations */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.video-description {
-    margin-top: 10px; /* Space between video and text */
-    text-align: center; /* Center align the text */
-    font-weight: 600; /* Make the text bold */
-    font-style: italic; /* Make the text italic */
-}
-}
-        /* Custom classes for Fraunces font */
-        .fraunces-thin {
-            font-family: "Fraunces", serif;
-            font-weight: 100;
-            font-style: normal;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-extralight {
-            font-family: "Fraunces", serif;
-            font-weight: 200;
-            font-style: normal;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-light {
-            font-family: "Fraunces", serif;
-            font-weight: 300;
-            font-style: normal;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-regular {
-            font-family: "Fraunces", serif;
-            font-weight: 400;
-            font-style: normal;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-medium {
-            font-family: "Fraunces", serif;
-            font-weight: 500;
-            font-style: normal;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-semibold {
-            font-family: "Fraunces", serif;
-            font-weight: 600;
-            font-style: normal;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-bold {
-            font-family: "Fraunces", serif;
-            font-weight: 700;
-            font-style: normal;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-thin-italic {
-            font-family: "Fraunces", serif;
-            font-weight: 100;
-            font-style: italic;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-extralight-italic {
-            font-family: "Fraunces", serif;
-            font-weight: 200;
-            font-style: italic;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-light-italic {
-            font-family: "Fraunces", serif;
-            font-weight: 300;
-            font-style: italic;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-regular-italic {
-            font-family: "Fraunces", serif;
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-medium-italic {
-            font-family: "Fraunces", serif;
-            font-weight: 500;
-            font-style: italic;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-semibold-italic {
-            font-family: "Fraunces", serif;
-            font-weight: 600;
-            font-style: italic;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-        .fraunces-bold-italic {
-            font-family: "Fraunces", serif;
-            font-weight: 700;
-            font-style: italic;
-            letter-spacing: -0.1px; /* Adjust letter spacing */
-        }
-    </style>
+    .project {
+      margin: 40px 0;
+      border-top: 1px solid #d2d2d2; /* divider above each row */
+      padding-top: 20px;          /* space between divider and text */
+    }
+    .project-info {
+      margin: 0 20px 10px;
+      font-family: 'Affairs mono', sans-serif;
+      color: black;
+    }
+    .project-info h2 {
+      font-size: 15px;
+      margin: 0;
+      font-family: 'Affairs regular', sans-serif;
+    }
+    .project-info p {
+      font-size: 10px;
+      margin: 5px 0 0;
+    }
+    .image-row {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      scroll-snap-type: x mandatory; /* snap to images */
+      scrollbar-width: none; /* Firefox */
+      margin-top: 10px;     /* space between text and images */
+      padding-bottom: 20px; /* space between images and browser edge */
+    }
+    .image-row::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
+    }
+    .image-row img {
+      flex: 0 0 auto;
+      width: 450px; /* increased width */
+      height: 450px; /* square shape */
+      object-fit: cover;
+      border-right: 1px solid black; /* light dividing line */
+      scroll-snap-align: start; /* align each image at start */
+    }
+    .image-row img:last-child {
+      border-right: none; /* remove line after last image */
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left-box">
-            <h1 class="fraunces-bold">Casper Tristan Read</h1>
-            <h2 class="fraunces-semibold">La Haine</h2>
-            <p class="text-next-to-gif fraunces-regular">Film to publication project based on the french Film "La Haine"</p>
-            <div class="flex-row">
-                <img src="LaHaineMain.gif" alt="GIF for Subtitle 1" class="gif-large">
-                
-            </div>
-            <img src="LaHaineSecond.gif" alt="GIF for Subtitle 2" class="gif-small">
-
-            <h2 class="fraunces-semibold">Climate Energy</h2>
-            <p class="text-next-to-gif fraunces-regular">Graphics to illustrate Solar and Green Energy"</p>
-            <div class="flex-row">
-                <img src="ClimateMain.gif" alt="GIF for Subtitle 3" class="gif-large">
-                
-                <img src="ClimateSecond.gif" alt="GIF for Subtitle 4" class="gif-medium">
-            </div>
-            
-
-            <h2 class="fraunces-semibold">Furniture</h2>
-            <p class="text-next-to-gif fraunces-regular">Creation of Furniture and Graphics Leaflet to Explain "</p>
-            <img src="Furniture.gif" alt="GIF for Subtitle 5" class="gif-large">
-         
-
-            <h2 class="fraunces-semibold">Premftbl</h2>
-            <p class="text-next-to-gif fraunces-regular">Led digital media strategy and graphic design for
-Premftbl"</p>
-             <img src="GIFPrem.gif" alt="GIF for Subtitle 6" class="gif-small">
-            
-        </div>
-        <div class="right-box">
-            <!-- Replace video with GIF -->
-            <img src="Porto2-2.gif" alt="GIF representation" class="gif-large">
-            <p class="video-description">This website was fully coded in Portugal (by Me!)</p>
-        </div>
+  <div id="custom-cursor"></div>
+  <header class="top-bar">
+    <div class="left">
+      <span>Casper Tristan</span>
     </div>
+    <div class="right">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="mailto:youremail@example.com">Email</a>
+    </div>
+  </header>
+  <div id="portfolio">
+    <section class="project">
+      <div class="project-info">
+        <h2>Learning Outdoors</h2>
+        <p>A book aimed at helping autisitic and ADHD kids oporate through forest schooling</p>
+      </div>
+      <div class="image-row">
+        <img src="IMAGES copy/scan3.gif" />
+        <img src="IMAGES copy/3.jpg" />
+        <img src="IMAGES copy/4.jpg" />
+        <img src="IMAGES copy/5.jpg" />
+      </div>
+    </section>
+    <section class="project">
+      <div class="project-info">
+        <h2>Hibakujumoku</h2>
+        <p>A paper map that shows all the trees that surveived trees they are called: Hibakujumoku.</p>
+      </div>
+      <div class="image-row">
+        <img src="IMAGES copy/5.jpg" />
+        <img src="IMAGES copy/15.png" />
+        <img src="IMAGES copy/6.jpg" />
+      </div>
+    </section>
+    <section class="project">
+      <div class="project-info">
+        <h2>Learning Outdoors</h2>
+        <p>A book aimed at helping autisitic and ADHD kids oporate through forest schooling</p>
+      </div>
+      <div class="image-row">
+        <img src="IMAGES copy/scan3.gif" />
+        <img src="IMAGES copy/3.jpg" />
+        <img src="IMAGES copy/4.jpg" />
+        <img src="IMAGES copy/5.jpg" />
+      </div>
+    </section>
+    <section class="project">
+      <div class="project-info">
+        <h2>Learning Outdoors</h2>
+        <p>A book aimed at helping autisitic and ADHD kids oporate through forest schooling</p>
+      </div>
+      <div class="image-row">
+        <img src="IMAGES copy/scan3.gif" />
+        <img src="IMAGES copy/3.jpg" />
+        <img src="IMAGES copy/4.jpg" />
+        <img src="IMAGES copy/5.jpg" />
+      </div>
+    </section>
+  </div>
+  <canvas id="scratchCanvas"></canvas>
+  <script>
+    const dpr = window.devicePixelRatio || 1;
+    const scratchColor = '#03910F'; // change this to your desired color
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      // Do not clear or reset the canvas here
+    }
+
+    resizeCanvas();
+
+    const coverImage = new Image();
+    coverImage.src = 'IMAGES copy/ct2.png';
+coverImage.onload = function() {
+  // dpr already defined
+
+  // First fill the canvas with scratchColor
+  ctx.fillStyle = scratchColor;
+  ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+
+  // Set composite to 'destination-out' to cut out transparent CT area
+  ctx.globalCompositeOperation = 'destination-out';
+
+  // Draw the black PNG (with transparent CT) smaller and centered
+  const scale = 1; // 50% size
+  const imgWidth = canvas.width / dpr * scale;
+  const imgHeight = canvas.height / dpr * scale;
+  const imgX = (canvas.width / dpr - imgWidth) / 2;
+  const imgY = (canvas.height / dpr - imgHeight) / 2;
+  ctx.drawImage(coverImage, imgX, imgY, imgWidth, imgHeight);
+
+  // Switch to scratch mode after
+  ctx.globalCompositeOperation = 'destination-out';
+};
+
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    const scratchRadius = 60; // smaller brush size
+    ctx.lineWidth = scratchRadius * 2 * dpr;
+
+    let isDrawing = false;
+    let lastX = 0, lastY = 0;
+    let scheduled = false;
+    let currentX = 0, currentY = 0;
+
+    function draw() {
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(currentX, currentY);
+      ctx.stroke();
+      lastX = currentX;
+      lastY = currentY;
+      scheduled = false;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Combined pointermove event for cursor and scratch
+    const customCursor = document.getElementById('custom-cursor');
+    document.addEventListener('pointermove', function(e) {
+      // Move custom cursor
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
+
+      // Scratch logic: skip tiny movements by comparing squared distance
+      const dx = e.clientX - currentX;
+      const dy = e.clientY - currentY;
+      if (dx * dx + dy * dy < 4) return; // skip if movement < 2px
+
+      lastX = currentX || e.clientX;
+      lastY = currentY || e.clientY;
+      currentX = e.clientX;
+      currentY = e.clientY;
+
+      if (!scheduled) {
+        scheduled = true;
+        requestAnimationFrame(draw);
+      }
+    });
+  </script>
 </body>
 </html>
