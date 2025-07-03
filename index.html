@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
+  <title>Casper Tristan</title>
   <style>
     #custom-cursor {
       position: fixed;
@@ -50,7 +50,7 @@
       margin-left: 15px; /* reduce spacing between links */
     }
     .top-bar a:hover {
-      color: rgb(4, 4, 245);
+      color: rgb(221, 245, 4);
       text-decoration: underline;
     }
     body, html {
@@ -148,6 +148,12 @@
     .image-row img:last-child {
       border-right: none; /* remove line after last image */
     }
+    .image-row img.large-image {
+      flex: 0 0 auto;
+      width: 550px;
+      height: 450px;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
@@ -157,9 +163,9 @@
       <span>Casper Tristan</span>
     </div>
     <div class="right">
-      <a href="https://instagram.com" target="_blank">Instagram</a>
-      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-      <a href="mailto:youremail@example.com">Email</a>
+      <a href="https://www.instagram.com/casper_5r/" target="_blank">Instagram</a>
+      <a href="linkedin.com/in/casper-r-1855b1173" target="_blank">LinkedIn</a>
+      <a href="rtcasper14@gmail.com">Email</a>
     </div>
   </header>
   <div id="portfolio">
@@ -169,10 +175,23 @@
         <p>A book aimed at helping autisitic and ADHD kids oporate through forest schooling</p>
       </div>
       <div class="image-row">
-        <img src="scan3.gif" />
-        <img src="1low.jpg" />
-        <img src="2low.jpg" />
-        <img src="3low.jpg" />
+        <img src="IMAGES copy/scan3.gif" />
+        <img src="IMAGES copy/2low.jpg" />
+        <img src="IMAGES copy/3low.jpg" />
+        <img src="IMAGES copy/4low.jpg" />
+      </div>
+    </section>
+    <section class="project">
+      <div class="project-info">
+        <h2>Seasonal living</h2>
+        <p>Each hand-printed page represents time through seasonal colours, letting
+          gradients, not clocks, guide the reader. </p>
+      </div>
+      <div class="image-row">
+        <img src="IMAGES copy/SEASON_LIVING_WEBSITE_ANIMATION.gif" />
+        <img src="IMAGES copy/2-1LOW.jpg" />
+        <img src="IMAGES copy/2-3LOW.jpg" />
+        <img src="IMAGES copy/2-2LOW.jpg" />
       </div>
     </section>
     <section class="project">
@@ -181,33 +200,11 @@
         <p>A paper map that shows all the trees that surveived trees they are called: Hibakujumoku.</p>
       </div>
       <div class="image-row">
-        <img src="IMAGES copy/5.jpg" />
-        <img src="IMAGES copy/15.png" />
-        <img src="IMAGES copy/6.jpg" />
-      </div>
-    </section>
-    <section class="project">
-      <div class="project-info">
-        <h2>Learning Outdoors</h2>
-        <p>A book aimed at helping autisitic and ADHD kids oporate through forest schooling</p>
-      </div>
-      <div class="image-row">
-        <img src="IMAGES copy/scan3.gif" />
-        <img src="IMAGES copy/3.jpg" />
-        <img src="IMAGES copy/4.jpg" />
-        <img src="IMAGES copy/5.jpg" />
-      </div>
-    </section>
-    <section class="project">
-      <div class="project-info">
-        <h2>Learning Outdoors</h2>
-        <p>A book aimed at helping autisitic and ADHD kids oporate through forest schooling</p>
-      </div>
-      <div class="image-row">
-        <img src="IMAGES copy/scan3.gif" />
-        <img src="IMAGES copy/3.jpg" />
-        <img src="IMAGES copy/4.jpg" />
-        <img src="IMAGES copy/5.jpg" />
+        <img src="IMAGES copy/ICPLARGE.png" class="large-image" />
+        <img src="IMAGES copy/ICP4.png" />
+        <img src="IMAGES copy/ICP3.png" />
+        <img src="IMAGES copy/ICP1png.png" />
+        <img src="IMAGES copy/ICP2.png" />
       </div>
     </section>
   </div>
@@ -231,7 +228,7 @@
     resizeCanvas();
 
     const coverImage = new Image();
-    coverImage.src = 'ct2.png';
+    coverImage.src = 'IMAGES copy/ct2.png';
 coverImage.onload = function() {
   // dpr already defined
 
