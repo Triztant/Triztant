@@ -331,6 +331,9 @@ coverImage.onload = function() {
         requestAnimationFrame(draw);
       }
     });
-  </script>
+</script>
+<script>
+  document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
+</script>
 </body>
 </html>
