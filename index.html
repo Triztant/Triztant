@@ -332,49 +332,71 @@ coverImage.onload = function() {
       }
     });
 </script>
+<div id="visitor-stats" style="color:black; padding:10px; text-align:center;">
+  <p id="visit-count">Total Visits: loading...</p>
+  <p id="unique-count">Unique Visitors: loading...</p>
+</div>
 <script>
-  document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
-</script>
-  <!-- ↓  Insert visitor counter here, just before </body>  ↓ -->
-  <div id="visitor-stats" style="color:black; padding:10px; text-align:center;">
-    <p id="visit-count">Total Visits: loading...</p>
-    <p id="unique-count">Unique Visitors: loading...</p>
-  </div>
-  <script>
-    (function(){
-      const namespace = 'casper-tristan';
-      const keyHits   = 'visitCount';
-      const keyUnique = 'uniqueCount';
+ <!-- Place this just above your closing </body> tag -->
 
-      // bump total visits
-      fetch(`https://api.countapi.xyz/hit/${namespace}/${keyHits}`)
+<div id="visitor-stats" style="
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  color: black;
+  padding: 5px;
+  font-size: 10px;
+  text-align: right;
+  z-index: 1000;
+">
+  <p id="visit-count">Total Visits: loading...</p>
+  <p id="unique-count">Unique Visitors: loading...</p>
+</div>
+
+<script>
+  (function(){
+    const namespace = 'casper-tristan';
+    const keyHits   = 'visitCount';
+    const keyUnique = 'uniqueCount';
+
+    // bump total visits
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${keyHits}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('visit-count')
+                .innerText = `Total Visits: ${data.value}`;
+      })
+      .catch(() => {
+        document.getElementById('visit-count')
+                .innerText = 'Total Visits: error';
+      });
+
+    // bump unique once per browser
+    if (!localStorage.getItem('visited')) {
+      localStorage.setItem('visited', 'true');
+      fetch(`https://api.countapi.xyz/hit/${namespace}/${keyUnique}`)
         .then(res => res.json())
         .then(data => {
-          document.getElementById('visit-count')
-                  .innerText = `Total Visits: ${data.value}`;
+          document.getElementById('unique-count')
+                  .innerText = `Unique Visitors: ${data.value}`;
+        })
+        .catch(() => {
+          document.getElementById('unique-count')
+                  .innerText = 'Unique Visitors: error';
         });
-
-      // bump unique count once per browser
-      if (!localStorage.getItem('visited')) {
-        localStorage.setItem('visited','true');
-        fetch(`https://api.countapi.xyz/hit/${namespace}/${keyUnique}`)
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById('unique-count')
-                    .innerText = `Unique Visitors: ${data.value}`;
-          });
-      } else {
-        // subsequent visits just read the current total
-        fetch(`https://api.countapi.xyz/get/${namespace}/${keyUnique}`)
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById('unique-count')
-                    .innerText = `Unique Visitors: ${data.value}`;
-          });
-      }
-    })();
-  </script>
-</body>
-</html>
+    } else {
+      fetch(`https://api.countapi.xyz/get/${namespace}/${keyUnique}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('unique-count')
+                  .innerText = `Unique Visitors: ${data.value}`;
+        })
+        .catch(() => {
+          document.getElementById('unique-count')
+                  .innerText = 'Unique Visitors: error';
+        });
+    }
+  })();
+</script>
 </body>
 </html>
