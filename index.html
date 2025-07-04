@@ -335,5 +335,46 @@ coverImage.onload = function() {
 <script>
   document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
 </script>
+  <!-- ↓  Insert visitor counter here, just before </body>  ↓ -->
+  <div id="visitor-stats" style="color:black; padding:10px; text-align:center;">
+    <p id="visit-count">Total Visits: loading...</p>
+    <p id="unique-count">Unique Visitors: loading...</p>
+  </div>
+  <script>
+    (function(){
+      const namespace = 'casper-tristan';
+      const keyHits   = 'visitCount';
+      const keyUnique = 'uniqueCount';
+
+      // bump total visits
+      fetch(`https://api.countapi.xyz/hit/${namespace}/${keyHits}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('visit-count')
+                  .innerText = `Total Visits: ${data.value}`;
+        });
+
+      // bump unique count once per browser
+      if (!localStorage.getItem('visited')) {
+        localStorage.setItem('visited','true');
+        fetch(`https://api.countapi.xyz/hit/${namespace}/${keyUnique}`)
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById('unique-count')
+                    .innerText = `Unique Visitors: ${data.value}`;
+          });
+      } else {
+        // subsequent visits just read the current total
+        fetch(`https://api.countapi.xyz/get/${namespace}/${keyUnique}`)
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById('unique-count')
+                    .innerText = `Unique Visitors: ${data.value}`;
+          });
+      }
+    })();
+  </script>
+</body>
+</html>
 </body>
 </html>
