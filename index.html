@@ -356,10 +356,6 @@
 coverImage.onload = function() {
   // dpr already defined
 
-  // First fill the canvas with scratchColor
-  ctx.fillStyle = scratchColor;
-  ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-
   // Set composite to 'destination-out' to cut out transparent CT area
   ctx.globalCompositeOperation = 'destination-out';
 
