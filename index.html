@@ -283,11 +283,20 @@
     <p>&copy; All rights reserved</p>
   </footer>
 
+  <!-- Overlay image shown immediately, canvas scratches on top -->
+  <img id="coverImg" src="ct2.png" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 49;
+    pointer-events: none;
+    display: block;
+  " />
   <canvas id="scratchCanvas"></canvas>
 
   <script>
     const dpr = window.devicePixelRatio || 1;
-    const scratchColor = '#03910F';
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -301,22 +310,14 @@
     }
 
     resizeCanvas();
-
-    // Fill green immediately so it covers the page before anything else loads
-    ctx.fillStyle = scratchColor;
-    ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-
-    const coverImage = new Image();
-    coverImage.src = 'ct2.png';
-    coverImage.onload = function() {
-      // Cut out the CT shape from the green fill
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.drawImage(coverImage, 0, 0, canvas.width / dpr, canvas.height / dpr);
-      ctx.globalCompositeOperation = 'destination-out';
-    };
+    window.addEventListener('resize', function() {
+      resizeCanvas();
+      updateBrushSize();
+    });
 
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
+    ctx.globalCompositeOperation = 'destination-out';
 
     function getScratchRadius() {
       return Math.min(window.innerWidth, window.innerHeight) * 0.30;
@@ -325,11 +326,6 @@
       ctx.lineWidth = getScratchRadius() * 2 * dpr;
     }
     updateBrushSize();
-
-    window.addEventListener('resize', function() {
-      resizeCanvas();
-      updateBrushSize();
-    });
 
     let lastX = 0, lastY = 0;
     let scheduled = false;
