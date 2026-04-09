@@ -151,7 +151,7 @@
     <div class="right">
       <a href="https://www.instagram.com/casper_5r/" target="_blank">Instagram</a>
       <a href="https://www.linkedin.com/in/casper-tristan-1855b1173" target="_blank">LinkedIn</a>
-      <a href="mailto:rtcasper14@gmail.com">Email</a>
+      <a id="emaillink">Email</a>
     </div>
   </header>
 
@@ -181,15 +181,15 @@
 
     <section class="project">
       <div class="project-info">
-        <h2>L'Equipe</h2>
-        <p>Working with L'Equipe to create an animated system that showcases the typography. A flexible, motion-led identity with type at the core.</p>
+        <h2>L&#39;Equipe</h2>
+        <p>Working with L&#39;Equipe to create an animated system that showcases the typography. A flexible, motion-led identity with type at the core.</p>
       </div>
       <div class="image-row">
         <img src="INTRO_2000x1334_HD.gif" />
         <img src="SOMMAIRE_INSTAGRAM _HD.gif" />
-        <img src="2026_D&AD_TYPE_DESIGN_LETTERING_3.jpg" />
-        <img src="2026_D&AD_TYPE_DESIGN_LETTERING_5.jpg" />
-        <img src="2026_D&AD_TYPE_DESIGN_LETTERING_10.jpg" />
+        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_3.jpg" />
+        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_5.jpg" />
+        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_10.jpg" />
       </div>
     </section>
 
@@ -235,7 +235,7 @@
       <div class="project-info">
         <h2>Seasonal Living</h2>
         <p>Each hand-printed page represents time through seasonal colours, letting gradient, not clocks guide the reader. Centred on planting and growth,
-          the book encourages nurturing vegetables with care and attention, reminding us that some things can't be rushed.</p>
+          the book encourages nurturing vegetables with care and attention, reminding us that some things can&#39;t be rushed.</p>
       </div>
       <div class="image-row">
         <img src="SEASON_LIVING_WEBSITE_ANIMATION.gif" />
@@ -266,16 +266,23 @@
   <footer class="site-footer">
     <p>&#8212; Designed by Casper Tristan</p>
     <p>&#8212; Coded by Casper Tristan</p>
-    <p><a href="mailto:rtcasper14@gmail.com">Email</a> for full PDF portfolio</p>
+    <p><a id="emaillink2">Email</a> for full PDF portfolio</p>
     <p>&#169; All rights reserved</p>
   </footer>
 
   <canvas id="scratchCanvas"></canvas>
 
   <script>
-    const dpr = window.devicePixelRatio || 1;
-    const canvas = document.getElementById('scratchCanvas');
-    const ctx = canvas.getContext('2d');
+    // Set email links via JS so Cloudflare never sees the address in HTML
+    var e = 'rtcasper14' + '@' + 'gmail.com';
+    document.getElementById('emaillink').href = 'mailto:' + e;
+    document.getElementById('emaillink2').href = 'mailto:' + e;
+  </script>
+
+  <script>
+    var dpr = window.devicePixelRatio || 1;
+    var canvas = document.getElementById('scratchCanvas');
+    var ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
       canvas.width = window.innerWidth * dpr;
@@ -286,15 +293,23 @@
       ctx.scale(dpr, dpr);
     }
 
-    resizeCanvas();
-
-    const coverImage = new Image();
-    coverImage.src = 'ct3.png';
-    coverImage.onload = function() {
+    function drawOverlay() {
+      var w = canvas.width / dpr;
+      var h = canvas.height / dpr;
+      var fontSize = Math.min(w, h) * 0.55;
       ctx.globalCompositeOperation = 'source-over';
-      ctx.drawImage(coverImage, 0, 0, canvas.width / dpr, canvas.height / dpr);
+      ctx.fillStyle = '#03910F';
+      ctx.fillRect(0, 0, w, h);
       ctx.globalCompositeOperation = 'destination-out';
-    };
+      ctx.font = fontSize + 'px "Affairs Regular", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('ct', w / 2, h / 2);
+      ctx.globalCompositeOperation = 'destination-out';
+    }
+
+    resizeCanvas();
+    drawOverlay();
 
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
@@ -309,12 +324,13 @@
 
     window.addEventListener('resize', function() {
       resizeCanvas();
+      drawOverlay();
       updateBrushSize();
     });
 
-    let lastX = 0, lastY = 0;
-    let scheduled = false;
-    let currentX = 0, currentY = 0;
+    var lastX = 0, lastY = 0;
+    var scheduled = false;
+    var currentX = 0, currentY = 0;
 
     function draw() {
       ctx.beginPath();
@@ -326,7 +342,7 @@
       scheduled = false;
     }
 
-    const customCursor = document.getElementById('custom-cursor');
+    var customCursor = document.getElementById('custom-cursor');
     document.addEventListener('pointermove', function(e) {
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
@@ -342,7 +358,7 @@
   </script>
 
   <script>
-    document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
+    document.querySelectorAll('img').forEach(function(img) { img.loading = 'lazy'; });
   </script>
 </body>
 </html>
