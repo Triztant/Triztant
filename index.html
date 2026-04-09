@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Casper Tristan</title>
-   <!-- Google Analytics -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P88NM5DB7P"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -56,7 +56,7 @@
     .top-bar a {
       color: white;
       text-decoration: underline;
-      margin-left: 15px; /* reduce spacing between links */
+      margin-left: 15px;
     }
     .top-bar a:hover {
       color: rgb(221, 245, 4);
@@ -67,7 +67,7 @@
       padding: 0;
       height: 100%;
       width: 100%;
-      background-color: whitesmoke; /* yellow background */
+      background-color: whitesmoke;
       font-family: 'Affairs Regular', sans-serif;
       cursor: none;
     }
@@ -78,45 +78,11 @@
       min-height: 100%;
       background-color: transparent;
     }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 2; /* stays below top bar */
-      pointer-events: none;
-    }
-    .text-area {
-      width: 200px;
-      margin-right: 20px;
-      font-family: 'Affairs Regular', sans-serif;
-      
-      flex-shrink: 0;
-    }
-    .image-columns {
-      display: flex;
-      flex: 1;
-      gap: 20px;
-      height: 100%;
-    }
-    .column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-    }
-    .column img {
-      width: 100%;
-      border-radius: 0;
-      border: none;
-      object-fit: cover;
-    }
 
     .project {
       margin: 40px 0;
-      border-top: 1px solid #d2d2d2; /* divider above each row */
-      padding-top: 20px;          /* space between divider and text */
+      border-top: 1px solid #d2d2d2;
+      padding-top: 20px;
     }
     .project-info {
       margin: 0 20px 10px;
@@ -138,77 +104,33 @@
       overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
       gap: 10px;
-      scroll-snap-type: x mandatory; /* snap to images */
-      scrollbar-width: none; /* Firefox */
-      margin-top: 10px;     /* space between text and images */
-      padding-bottom: 20px; /* space between images and browser edge */
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      margin-top: 10px;
+      padding-bottom: 20px;
+      align-items: stretch;
     }
     .image-row::-webkit-scrollbar {
-      display: none; /* Chrome, Safari */
+      display: none;
     }
+    /* All images share the same viewport-relative height; width follows natural aspect ratio */
     .image-row img {
       flex: 0 0 auto;
-      width: 450px; /* increased width */
-      height: 450px; /* square shape */
-      object-fit: cover;
-      scroll-snap-align: start; /* align each image at start */
+      height: 38vw;
+      max-height: 520px;
+      width: auto;
+      object-fit: contain;
+      scroll-snap-align: start;
     }
-    .image-row img:last-child {
-      border-right: none; /* remove line after last image */
-    }
-    .image-row img.large-image {
-      flex: 0 0 auto;
-      width: 550px;
-      height: 450px;
-      object-fit: cover;
-    }
-    .image-row img.long-image {
-      flex: 0 0 auto;
-      width: 303px;
-      height: 450px;
-      object-fit: cover;
-    }
-    .image-row img.gif-image {
-      flex: 0 0 auto;
-      width: 624px;
-      height: 416px;
-      object-fit: cover;
-    }
-    .image-row img.poster-image {
-      flex: 0 0 auto;
-      width: 318px;
-      height: 450px;
-      object-fit: cover;
-    }
-    .image-row img.sign-image {
-      flex: 0 0 auto;
-      width: 970px;
-      height: 450px;
-      object-fit: cover;
-    }
-     .image-row img.equipe-image {
-      flex: 0 0 auto;
-      width: 1500px;
-      height: 1001px;
-      object-fit: cover;
-    }
-    .image-row img.insta-image {
-      flex: 0 0 auto;
-      width: 333px;
-      height: 416px;
-      object-fit: cover;
-    }
-    /* Hide custom cursor and scratch layer on touch devices */
+    /* Hide custom cursor on touch devices */
     @media (pointer: coarse) {
       #custom-cursor {
         display: none !important;
       }
       body, html {
         cursor: auto !important;
-     }
-    }  /* ← media query closed here */
-
-    /* Footer styles */
+      }
+    }
     .site-footer {
       width: 100%;
       padding: 20px 0;
@@ -241,72 +163,76 @@
       <a href="mailto:rtcasper14@gmail.com">Email</a>
     </div>
   </header>
+
   <div id="portfolio">
-      <!-- ↓ PREMIFTBL SHOULD BE HERE, INSIDE #portfolio ↓ -->
-  <section class="project">
-    <div class="project-info">
-      <h2>Premftbl</h2>
-      <p>Designed and developed the visual style for @Premftbl, a football-focused social media account. 
-        Created consistent, branded templates to maintain visual cohesion across all posts and ensure a recognisable identity.</p>
-    </div>
-    <div class="image-row">
-      <img src="PREMFTBL FORMATTED1_16.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_08.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_03.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_36.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_12.png" class="long-image"/>  
-      <img src="PREMFTBL FORMATTED1_15.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_02.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_01.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_27.png" class="long-image"/>  
-      <img src="PREMFTBL FORMATTED1_31.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_21.png" class="long-image"/>
-      <img src="PREMFTBL FORMATTED1_19.png" class="long-image"/>
-      
-          </div>
-      </section>
-         <section class="project">
+
+    <section class="project">
+      <div class="project-info">
+        <h2>Premftbl</h2>
+        <p>Designed and developed the visual style for @Premftbl, a football-focused social media account. 
+          Created consistent, branded templates to maintain visual cohesion across all posts and ensure a recognisable identity.</p>
+      </div>
+      <div class="image-row">
+        <img src="PREMFTBL FORMATTED1_16.png" />
+        <img src="PREMFTBL FORMATTED1_08.png" />
+        <img src="PREMFTBL FORMATTED1_03.png" />
+        <img src="PREMFTBL FORMATTED1_36.png" />
+        <img src="PREMFTBL FORMATTED1_12.png" />
+        <img src="PREMFTBL FORMATTED1_15.png" />
+        <img src="PREMFTBL FORMATTED1_02.png" />
+        <img src="PREMFTBL FORMATTED1_01.png" />
+        <img src="PREMFTBL FORMATTED1_27.png" />
+        <img src="PREMFTBL FORMATTED1_31.png" />
+        <img src="PREMFTBL FORMATTED1_21.png" />
+        <img src="PREMFTBL FORMATTED1_19.png" />
+      </div>
+    </section>
+
+    <section class="project">
       <div class="project-info">
         <h2>Mooose Skin Care</h2>
         <p>Working with Mooose Skincare to develop a full visual identity and motion system for launch. The outcome is a clear and flexible system, with simple, structured visuals and motion.</p>
       </div>
       <div class="image-row">
-        <img src="LAYOUT_624x416.gif" class="gif-image"/>
-        <img src="SOMMAIRE_INSTAGRAM_416.gif" class="insta-image"/>
-        <img src="ALL_LOGOS_BRANDBLOCK_ZOOM_OUT.gif" class="gif-image"/>
-        <img src="WORDMARK_CONSTRUCTION copie.gif" class="gif-image"/>
-    </div>
-      </section>
+        <img src="LAYOUT_624x416.gif" />
+        <img src="SOMMAIRE_INSTAGRAM_416.gif" />
+        <img src="ALL_LOGOS_BRANDBLOCK_ZOOM_OUT.gif" />
+        <img src="WORDMARK_CONSTRUCTION copie.gif" />
+      </div>
+    </section>
+
     <section class="project">
       <div class="project-info">
         <h2>Museum of Porcelain</h2>
-        <p> Created a complete branding system for a porcelain museum, developing a unified visual 
-            language and applying it across all aspects of the brand. </p>
+        <p>Created a complete branding system for a porcelain museum, developing a unified visual 
+          language and applying it across all aspects of the brand.</p>
       </div>
       <div class="image-row">
         <img src="MUSUEMgif.gif" />
-        <img src="POSTER.png" class="poster-image" />
+        <img src="POSTER.png" />
         <img src="SIGN5.png" />
-        <img src="SIGN1.png" class="sign-image" />
-    </div>
+        <img src="SIGN1.png" />
+      </div>
     </section>
+
     <section class="project">
       <div class="project-info">
         <h2>Temporary Platform</h2>
-        <p> Campaign for a company raising awareness of the carbon impact of websites, showing how design choices like images, colours, and fonts affect online emissions. </p>
+        <p>Campaign for a company raising awareness of the carbon impact of websites, showing how design choices like images, colours, and fonts affect online emissions.</p>
       </div>
       <div class="image-row">
-        <img src="aniamted3INTRO.gif" class="large-image"/>
-        <img src="Comp 1.gif" class="large-image"/>
+        <img src="aniamted3INTRO.gif" />
+        <img src="Comp 1.gif" />
         <img src="Comp 2.gif" />
         <img src="Comp 3.gif" />
       </div>
     </section>
+
     <section class="project">
       <div class="project-info">
         <h2>Seasonal Living</h2>
-        <p> Each hand-printed page represents time through seasonal colours, letting gradient, not clocks guide the reader. Centred on planting and growth, 
-          the book encourages nurturing vegetables with care and attention, reminding us that some things can’t be rushed. </p>
+        <p>Each hand-printed page represents time through seasonal colours, letting gradient, not clocks guide the reader. Centred on planting and growth, 
+          the book encourages nurturing vegetables with care and attention, reminding us that some things can't be rushed.</p>
       </div>
       <div class="image-row">
         <img src="SEASON_LIVING_WEBSITE_ANIMATION.gif" />
@@ -315,6 +241,7 @@
         <img src="2-1LOW.jpg" />
       </div>
     </section>
+
     <section class="project">
       <div class="project-info">
         <h2>Hibakujumoku</h2>
@@ -323,112 +250,33 @@
           Rather than imposing on them, the text shifts and flows around each dot, acknowledging the trees as steadfast, immovable presences within the design.</p>
       </div>
       <div class="image-row">
-        <img src="ICPLARGE.png" class="large-image" />
+        <img src="ICPLARGE.png" />
         <img src="ICP4.png" />
         <img src="ICP3.png" />
         <img src="ICP1png.png" />
         <img src="ICP2.png" />
       </div>
     </section>
+
   </div>
-   </div>
-     </section>  <!-- end Hibakujumoku -->
 
-      <!-- now will appear -->
-    </div>
-  </section>
+  <footer class="site-footer">
+    <p>— Designed by Casper Tristan</p>
+    <p>— Coded by Casper Tristan</p>
+    <p><a href="mailto:rtcasper14@gmail.com">Email</a> for full PDF portfolio</p>
+    <p>© All rights reserved</p>
+  </footer>
 
-</div>  <!-- close #portfolio -->
-<footer class="site-footer">
-  <p>— Designed by Casper Tristan</p>
-  <p>— Coded by Casper Tristan</p>
-  <p>
-    <a href="mailto:rtcasper14@gmail.com">Email</a> for full PDF portfolio
-  </p>
-  <p>© All rights reserved</p>
-</footer>
-<canvas id="scratchCanvas"></canvas>
   <script>
-    const dpr = window.devicePixelRatio || 1;
-    const scratchColor = '#03910F'; // change this to your desired color
-    const canvas = document.getElementById('scratchCanvas');
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-      // Do not clear or reset the canvas here
-    }
-
-    resizeCanvas();
-
-    const coverImage = new Image();
-    coverImage.src = 'ct2.png';
-coverImage.onload = function() {
-  // dpr already defined
-
-  // Set composite to 'destination-out' to cut out transparent CT area
-  ctx.globalCompositeOperation = 'destination-out';
-
-  // Draw the black PNG (with transparent CT) smaller and centered
-  const scale = 1; // 50% size
-  const imgWidth = canvas.width / dpr * scale;
-  const imgHeight = canvas.height / dpr * scale;
-  const imgX = (canvas.width / dpr - imgWidth) / 2;
-  const imgY = (canvas.height / dpr - imgHeight) / 2;
-  ctx.drawImage(coverImage, imgX, imgY, imgWidth, imgHeight);
-
-  // Switch to scratch mode after
-  ctx.globalCompositeOperation = 'destination-out';
-};
-
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    const scratchRadius = 60; // smaller brush size
-    ctx.lineWidth = scratchRadius * 2 * dpr;
-
-    let isDrawing = false;
-    let lastX = 0, lastY = 0;
-    let scheduled = false;
-    let currentX = 0, currentY = 0;
-
-    function draw() {
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(currentX, currentY);
-      ctx.stroke();
-      lastX = currentX;
-      lastY = currentY;
-      scheduled = false;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-
-    // Combined pointermove event for cursor and scratch
     const customCursor = document.getElementById('custom-cursor');
     document.addEventListener('pointermove', function(e) {
-      // Move custom cursor
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
-
-     
-      lastX = currentX || e.clientX;
-      lastY = currentY || e.clientY;
-      currentX = e.clientX;
-      currentY = e.clientY;
-
-      if (!scheduled) {
-        scheduled = true;
-        requestAnimationFrame(draw);
-      }
     });
-</script>
-<script>
-document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
-</script>
+  </script>
+
+  <script>
+    document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
+  </script>
 </body>
 </html>
