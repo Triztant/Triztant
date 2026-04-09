@@ -304,13 +304,13 @@
       ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
       ctx.globalCompositeOperation = 'destination-out';
     };
-    cover.src = 'ct2.png';
+    cover.src = 'ct3.png';
 
     // Scratch is active immediately — even before PNG loads the green is scratchable
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
-    ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 0.60;
+    ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.0;
 
     var lastX = 0, lastY = 0, scheduled = false, currentX = 0, currentY = 0;
 
