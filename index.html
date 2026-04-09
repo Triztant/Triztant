@@ -302,11 +302,14 @@
 
     resizeCanvas();
 
+    // Fill green immediately so it covers the page before anything else loads
+    ctx.fillStyle = scratchColor;
+    ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+
     const coverImage = new Image();
     coverImage.src = 'ct2.png';
     coverImage.onload = function() {
-      ctx.fillStyle = scratchColor;
-      ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      // Cut out the CT shape from the green fill
       ctx.globalCompositeOperation = 'destination-out';
       ctx.drawImage(coverImage, 0, 0, canvas.width / dpr, canvas.height / dpr);
       ctx.globalCompositeOperation = 'destination-out';
