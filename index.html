@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Casper Tristan</title>
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P88NM5DB7P"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,7 +11,6 @@
     gtag('js', new Date());
     gtag('config', 'G-P88NM5DB7P');
   </script>
-  <!-- end Google Analytics -->
   <style>
     #custom-cursor {
       position: fixed;
@@ -91,13 +89,13 @@
     }
     .project-info {
       margin: 0 20px 10px;
-      font-family: 'Affairs mono', sans-serif;
+      font-family: 'Affairs Mono', sans-serif;
       color: black;
     }
     .project-info h2 {
       font-size: 15px;
       margin: 0;
-      font-family: 'Affairs regular', sans-serif;
+      font-family: 'Affairs Regular', sans-serif;
     }
     .project-info p {
       font-size: 10px;
@@ -128,12 +126,8 @@
       scroll-snap-align: start;
     }
     @media (pointer: coarse) {
-      #custom-cursor {
-        display: none !important;
-      }
-      body, html {
-        cursor: auto !important;
-      }
+      #custom-cursor { display: none !important; }
+      body, html { cursor: auto !important; }
     }
     .site-footer {
       width: 100%;
@@ -145,22 +139,15 @@
       position: relative;
       z-index: 100;
     }
-    .site-footer p {
-      margin: 0;
-      font-size: 10px;
-    }
-    .site-footer a {
-      color: inherit;
-      text-decoration: underline;
-    }
+    .site-footer p { margin: 0; font-size: 10px; }
+    .site-footer a { color: inherit; text-decoration: underline; }
   </style>
 </head>
 <body>
   <div id="custom-cursor"></div>
+
   <header class="top-bar">
-    <div class="left">
-      <span>Casper Tristan</span>
-    </div>
+    <div class="left"><span>Casper Tristan</span></div>
     <div class="right">
       <a href="https://www.instagram.com/casper_5r/" target="_blank">Instagram</a>
       <a href="https://www.linkedin.com/in/casper-tristan-1855b1173" target="_blank">LinkedIn</a>
@@ -277,22 +264,12 @@
   </div>
 
   <footer class="site-footer">
-    <p>— Designed by Casper Tristan</p>
-    <p>— Coded by Casper Tristan</p>
+    <p>&#8212; Designed by Casper Tristan</p>
+    <p>&#8212; Coded by Casper Tristan</p>
     <p><a href="mailto:rtcasper14@gmail.com">Email</a> for full PDF portfolio</p>
-    <p>&copy; All rights reserved</p>
+    <p>&#169; All rights reserved</p>
   </footer>
 
-  <!-- Overlay image shown immediately, canvas scratches on top -->
-  <img id="coverImg" src="ct3.png" style="
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: 49;
-    pointer-events: none;
-    display: block;
-  " />
   <canvas id="scratchCanvas"></canvas>
 
   <script>
@@ -310,14 +287,17 @@
     }
 
     resizeCanvas();
-    window.addEventListener('resize', function() {
-      resizeCanvas();
-      updateBrushSize();
-    });
+
+    const coverImage = new Image();
+    coverImage.src = 'ct2.png';
+    coverImage.onload = function() {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.drawImage(coverImage, 0, 0, canvas.width / dpr, canvas.height / dpr);
+      ctx.globalCompositeOperation = 'destination-out';
+    };
 
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
-    ctx.globalCompositeOperation = 'destination-out';
 
     function getScratchRadius() {
       return Math.min(window.innerWidth, window.innerHeight) * 0.30;
@@ -326,6 +306,11 @@
       ctx.lineWidth = getScratchRadius() * 2 * dpr;
     }
     updateBrushSize();
+
+    window.addEventListener('resize', function() {
+      resizeCanvas();
+      updateBrushSize();
+    });
 
     let lastX = 0, lastY = 0;
     let scheduled = false;
@@ -345,12 +330,10 @@
     document.addEventListener('pointermove', function(e) {
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
-
       lastX = currentX || e.clientX;
       lastY = currentY || e.clientY;
       currentX = e.clientX;
       currentY = e.clientY;
-
       if (!scheduled) {
         scheduled = true;
         requestAnimationFrame(draw);
