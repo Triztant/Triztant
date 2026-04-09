@@ -308,8 +308,26 @@
       ctx.globalCompositeOperation = 'destination-out';
     }
 
+    // Draw a plain green cover instantly — no font needed
+    function drawGreenCover() {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = '#03910F';
+      ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      ctx.globalCompositeOperation = 'destination-out';
+    }
+
     resizeCanvas();
-    drawOverlay();
+    drawGreenCover(); // instant — covers page immediately
+
+    // Then load font and redraw with ct cutout as soon as font is ready
+    document.fonts.load('1em "Affairs Regular"').then(function() {
+      resizeCanvas();
+      drawOverlay();
+      setupScratch();
+    }).catch(function() {
+      // Font failed — just use green cover, still scratchable
+      setupScratch();
+    });
 
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
@@ -320,7 +338,6 @@
     function updateBrushSize() {
       ctx.lineWidth = getScratchRadius() * 2 * dpr;
     }
-    updateBrushSize();
 
     window.addEventListener('resize', function() {
       resizeCanvas();
@@ -343,17 +360,27 @@
     }
 
     var customCursor = document.getElementById('custom-cursor');
+
+    function setupScratch() {
+      updateBrushSize();
+      document.addEventListener('pointermove', function(e) {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
+        lastX = currentX || e.clientX;
+        lastY = currentY || e.clientY;
+        currentX = e.clientX;
+        currentY = e.clientY;
+        if (!scheduled) {
+          scheduled = true;
+          requestAnimationFrame(draw);
+        }
+      }, { passive: true });
+    }
+
+    // Cursor still moves even before font loads
     document.addEventListener('pointermove', function(e) {
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
-      lastX = currentX || e.clientX;
-      lastY = currentY || e.clientY;
-      currentX = e.clientX;
-      currentY = e.clientY;
-      if (!scheduled) {
-        scheduled = true;
-        requestAnimationFrame(draw);
-      }
     }, { passive: true });
   </script>
 
@@ -362,3 +389,4 @@
   </script>
 </body>
 </html>
+
