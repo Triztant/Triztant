@@ -98,6 +98,13 @@
       font-size: 10px;
       margin: 5px 0 0;
     }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
     .image-row {
       display: flex;
       overflow-x: auto;
@@ -108,7 +115,8 @@
       scrollbar-width: none;
       margin-top: 10px;
       padding-bottom: 20px;
-      align-items: stretch;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
     .image-row::-webkit-scrollbar {
       display: none;
@@ -160,7 +168,7 @@
     <div class="right">
       <a href="https://www.instagram.com/casper_5r/" target="_blank">Instagram</a>
       <a href="www.linkedin.com/in/casper-tristan-1855b1173" target="_blank">LinkedIn</a>
-      <a href="mailto:rtcasper14@gmail.com">Email</a>
+      <a href="/cdn-cgi/l/email-protection#176563747664677265262357707a767e7b3974787a">Email</a>
     </div>
   </header>
 
@@ -275,20 +283,11 @@
   <footer class="site-footer">
     <p>— Designed by Casper Tristan</p>
     <p>— Coded by Casper Tristan</p>
-    <p><a href="mailto:rtcasper14@gmail.com">Email</a> for full PDF portfolio</p>
+    <p><a href="/cdn-cgi/l/email-protection#a2d0d6c1c3d1d2c7d09396e2c5cfc3cbce8cc1cdcf">Email</a> for full PDF portfolio</p>
     <p>© All rights reserved</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const customCursor = document.getElementById('custom-cursor');
     document.addEventListener('pointermove', function(e) {
-      customCursor.style.left = e.clientX + 'px';
-      customCursor.style.top = e.clientY + 'px';
-    });
-  </script>
-
-  <script>
-    document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
-  </script>
-</body>
-</html>
+      customCursor.style.left = e.client
