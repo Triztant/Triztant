@@ -11,6 +11,7 @@
     gtag('js', new Date());
     gtag('config', 'G-P88NM5DB7P');
   </script>
+  <link rel="preload" href="ct2.png" as="image" />
   <style>
     #custom-cursor {
       position: fixed;
@@ -284,70 +285,34 @@
     var canvas = document.getElementById('scratchCanvas');
     var ctx = canvas.getContext('2d');
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-    }
+    // Size canvas immediately
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.scale(dpr, dpr);
 
-    function drawOverlay() {
-      var w = canvas.width / dpr;
-      var h = canvas.height / dpr;
-      var fontSize = Math.min(w, h) * 0.55;
+    // Step 1: fill green instantly — zero wait
+    ctx.fillStyle = '#03910F';
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+    // Step 2: draw ct2.png on top as soon as it loads (it's tiny so near-instant)
+    // PNG is already cached by browser from <link rel=preload> in <head>
+    var cover = new Image();
+    cover.onload = function() {
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = '#03910F';
-      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
       ctx.globalCompositeOperation = 'destination-out';
-      ctx.font = fontSize + 'px "Affairs Regular", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('ct', w / 2, h / 2);
-      ctx.globalCompositeOperation = 'destination-out';
-    }
+    };
+    cover.src = 'ct2.png';
 
-    // Draw a plain green cover instantly — no font needed
-    function drawGreenCover() {
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = '#03910F';
-      ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-      ctx.globalCompositeOperation = 'destination-out';
-    }
-
-    resizeCanvas();
-    drawGreenCover(); // instant — covers page immediately
-
-    // Then load font and redraw with ct cutout as soon as font is ready
-    document.fonts.load('1em "Affairs Regular"').then(function() {
-      resizeCanvas();
-      drawOverlay();
-      setupScratch();
-    }).catch(function() {
-      // Font failed — just use green cover, still scratchable
-      setupScratch();
-    });
-
+    // Scratch is active immediately — even before PNG loads the green is scratchable
+    ctx.globalCompositeOperation = 'destination-out';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
+    ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 0.60;
 
-    function getScratchRadius() {
-      return Math.min(window.innerWidth, window.innerHeight) * 0.30;
-    }
-    function updateBrushSize() {
-      ctx.lineWidth = getScratchRadius() * 2 * dpr;
-    }
-
-    window.addEventListener('resize', function() {
-      resizeCanvas();
-      drawOverlay();
-      updateBrushSize();
-    });
-
-    var lastX = 0, lastY = 0;
-    var scheduled = false;
-    var currentX = 0, currentY = 0;
+    var lastX = 0, lastY = 0, scheduled = false, currentX = 0, currentY = 0;
 
     function draw() {
       ctx.beginPath();
@@ -360,28 +325,31 @@
     }
 
     var customCursor = document.getElementById('custom-cursor');
-
-    function setupScratch() {
-      updateBrushSize();
-      document.addEventListener('pointermove', function(e) {
-        customCursor.style.left = e.clientX + 'px';
-        customCursor.style.top = e.clientY + 'px';
-        lastX = currentX || e.clientX;
-        lastY = currentY || e.clientY;
-        currentX = e.clientX;
-        currentY = e.clientY;
-        if (!scheduled) {
-          scheduled = true;
-          requestAnimationFrame(draw);
-        }
-      }, { passive: true });
-    }
-
-    // Cursor still moves even before font loads
     document.addEventListener('pointermove', function(e) {
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
+      lastX = currentX || e.clientX;
+      lastY = currentY || e.clientY;
+      currentX = e.clientX;
+      currentY = e.clientY;
+      if (!scheduled) {
+        scheduled = true;
+        requestAnimationFrame(draw);
+      }
     }, { passive: true });
+
+    window.addEventListener('resize', function() {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      ctx.fillStyle = '#03910F';
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 0.60;
+    });
   </script>
 
   <script>
