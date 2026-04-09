@@ -21,7 +21,7 @@
       background: white;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 1000;
+      z-index: 9999;
       transform: translate(-50%, -50%);
       mix-blend-mode: difference;
     }
@@ -50,7 +50,7 @@
       padding-left: 25px;
       font-family: 'Affairs Mono', sans-serif;
       font-size: 14px;
-      z-index: 10;
+      z-index: 100;
       mix-blend-mode: difference;
     }
     .top-bar a {
@@ -73,12 +73,17 @@
     }
     #portfolio {
       position: relative;
-      z-index: 1;
       width: 100%;
       min-height: 100%;
       background-color: transparent;
     }
-
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      pointer-events: none;
+    }
     .project {
       margin: 40px 0;
       border-top: 1px solid #d2d2d2;
@@ -98,13 +103,6 @@
       font-size: 10px;
       margin: 5px 0 0;
     }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
     .image-row {
       display: flex;
       overflow-x: auto;
@@ -121,7 +119,6 @@
     .image-row::-webkit-scrollbar {
       display: none;
     }
-    /* All images share the same viewport-relative height; width follows natural aspect ratio */
     .image-row img {
       flex: 0 0 auto;
       height: 38vw;
@@ -130,7 +127,6 @@
       object-fit: contain;
       scroll-snap-align: start;
     }
-    /* Hide custom cursor on touch devices */
     @media (pointer: coarse) {
       #custom-cursor {
         display: none !important;
@@ -147,7 +143,7 @@
       color: #333;
       font-family: 'Affairs Regular', sans-serif;
       position: relative;
-      z-index: 1;
+      z-index: 100;
     }
     .site-footer p {
       margin: 0;
@@ -167,8 +163,8 @@
     </div>
     <div class="right">
       <a href="https://www.instagram.com/casper_5r/" target="_blank">Instagram</a>
-      <a href="http://www.linkedin.com/in/casper-tristan-1855b1173" target="_blank">LinkedIn</a>
-      <a href="/cdn-cgi/l/email-protection#176563747664677265262357707a767e7b3974787a">Email</a>
+      <a href="https://www.linkedin.com/in/casper-tristan-1855b1173" target="_blank">LinkedIn</a>
+      <a href="mailto:rtcasper14@gmail.com">Email</a>
     </div>
   </header>
 
@@ -177,7 +173,7 @@
     <section class="project">
       <div class="project-info">
         <h2>Premftbl</h2>
-        <p>Designed and developed the visual style for @Premftbl, a football-focused social media account. 
+        <p>Designed and developed the visual style for @Premftbl, a football-focused social media account.
           Created consistent, branded templates to maintain visual cohesion across all posts and ensure a recognisable identity.</p>
       </div>
       <div class="image-row">
@@ -199,7 +195,7 @@
     <section class="project">
       <div class="project-info">
         <h2>L'Equipe</h2>
-        <p>Working with L’Équipe to create an animated system that showcases the typography. A flexible, motion-led identity with type at the core.</p>
+        <p>Working with L'Equipe to create an animated system that showcases the typography. A flexible, motion-led identity with type at the core.</p>
       </div>
       <div class="image-row">
         <img src="INTRO_2000x1334_HD.gif" />
@@ -209,13 +205,13 @@
         <img src="2026_D&AD_TYPE_DESIGN_LETTERING_10.jpg" />
       </div>
     </section>
+
     <section class="project">
       <div class="project-info">
         <h2>Mooose Skin Care</h2>
         <p>Working with Mooose Skincare to develop a full visual identity and motion system for launch. The outcome is a clear and flexible system, with simple, structured visuals and motion.</p>
       </div>
       <div class="image-row">
-      
         <img src="ALL_LOGOS_BRANDBLOCK_ZOOM_OUT.gif" />
         <img src="WORDMARK_CONSTRUCTION copie.gif" />
       </div>
@@ -224,7 +220,7 @@
     <section class="project">
       <div class="project-info">
         <h2>Museum of Porcelain</h2>
-        <p>Created a complete branding system for a porcelain museum, developing a unified visual 
+        <p>Created a complete branding system for a porcelain museum, developing a unified visual
           language and applying it across all aspects of the brand.</p>
       </div>
       <div class="image-row">
@@ -251,7 +247,7 @@
     <section class="project">
       <div class="project-info">
         <h2>Seasonal Living</h2>
-        <p>Each hand-printed page represents time through seasonal colours, letting gradient, not clocks guide the reader. Centred on planting and growth, 
+        <p>Each hand-printed page represents time through seasonal colours, letting gradient, not clocks guide the reader. Centred on planting and growth,
           the book encourages nurturing vegetables with care and attention, reminding us that some things can't be rushed.</p>
       </div>
       <div class="image-row">
@@ -265,8 +261,8 @@
     <section class="project">
       <div class="project-info">
         <h2>Hibakujumoku</h2>
-        <p>This project is based on the hibaku trees, those that survived the atomic bombing of Hiroshima. 
-          Each dot on the layout marks the precise location of a surviving tree, forming a quiet map of resilience. 
+        <p>This project is based on the hibaku trees, those that survived the atomic bombing of Hiroshima.
+          Each dot on the layout marks the precise location of a surviving tree, forming a quiet map of resilience.
           Rather than imposing on them, the text shifts and flows around each dot, acknowledging the trees as steadfast, immovable presences within the design.</p>
       </div>
       <div class="image-row">
@@ -283,11 +279,88 @@
   <footer class="site-footer">
     <p>— Designed by Casper Tristan</p>
     <p>— Coded by Casper Tristan</p>
-    <p><a href="/cdn-cgi/l/email-protection#a2d0d6c1c3d1d2c7d09396e2c5cfc3cbce8cc1cdcf">Email</a> for full PDF portfolio</p>
-    <p>© All rights reserved</p>
+    <p><a href="mailto:rtcasper14@gmail.com">Email</a> for full PDF portfolio</p>
+    <p>&copy; All rights reserved</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <canvas id="scratchCanvas"></canvas>
+
+  <script>
+    const dpr = window.devicePixelRatio || 1;
+    const scratchColor = '#03910F';
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+
+    resizeCanvas();
+
+    const coverImage = new Image();
+    coverImage.src = 'ct2.png';
+    coverImage.onload = function() {
+      ctx.fillStyle = scratchColor;
+      ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.drawImage(coverImage, 0, 0, canvas.width / dpr, canvas.height / dpr);
+      ctx.globalCompositeOperation = 'destination-out';
+    };
+
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+
+    function getScratchRadius() {
+      return Math.min(window.innerWidth, window.innerHeight) * 0.30;
+    }
+    function updateBrushSize() {
+      ctx.lineWidth = getScratchRadius() * 2 * dpr;
+    }
+    updateBrushSize();
+
+    window.addEventListener('resize', function() {
+      resizeCanvas();
+      updateBrushSize();
+    });
+
+    let lastX = 0, lastY = 0;
+    let scheduled = false;
+    let currentX = 0, currentY = 0;
+
+    function draw() {
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(currentX, currentY);
+      ctx.stroke();
+      lastX = currentX;
+      lastY = currentY;
+      scheduled = false;
+    }
+
     const customCursor = document.getElementById('custom-cursor');
     document.addEventListener('pointermove', function(e) {
-      customCursor.style.left = e.client
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
+
+      lastX = currentX || e.clientX;
+      lastY = currentY || e.clientY;
+      currentX = e.clientX;
+      currentY = e.clientY;
+
+      if (!scheduled) {
+        scheduled = true;
+        requestAnimationFrame(draw);
+      }
+    }, { passive: true });
+  </script>
+
+  <script>
+    document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
+  </script>
+</body>
+</html>
