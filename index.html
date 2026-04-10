@@ -344,26 +344,14 @@
     }
 
     ctx.globalCompositeOperation = 'destination-out';
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
 
-    var lastX = null, lastY = null, scheduled = false, currentX = 0, currentY = 0;
+    var currentX = 0, currentY = 0, scheduled = false;
+    var radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
 
     function draw() {
-      // Skip if we don't have a previous point yet — prevents line from corner
-      if (lastX === null) {
-        lastX = currentX;
-        lastY = currentY;
-        scheduled = false;
-        return;
-      }
       ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(currentX, currentY);
-      ctx.stroke();
-      lastX = currentX;
-      lastY = currentY;
+      ctx.arc(currentX, currentY, radius, 0, Math.PI * 2);
+      ctx.fill();
       scheduled = false;
     }
 
@@ -371,8 +359,6 @@
     document.addEventListener('pointermove', function(e) {
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
-      lastX = currentX !== 0 ? currentX : null;
-      lastY = currentY !== 0 ? currentY : null;
       currentX = e.clientX;
       currentY = e.clientY;
       if (!scheduled) {
@@ -380,16 +366,6 @@
         requestAnimationFrame(draw);
       }
     }, { passive: true });
-
-    // Reset last position when cursor leaves window so no line on re-entry
-    document.addEventListener('pointerleave', function() {
-      lastX = null;
-      lastY = null;
-    });
-    document.addEventListener('pointerenter', function() {
-      lastX = null;
-      lastY = null;
-    });
 
     window.addEventListener('resize', function() {
       canvas.width = window.innerWidth * dpr;
@@ -401,7 +377,7 @@
       ctx.fillStyle = '#03910F';
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
       ctx.globalCompositeOperation = 'destination-out';
-      ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
+      radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
     });
 
     // Redraw cover when returning to tab or app
@@ -431,10 +407,9 @@
       ctx.globalCompositeOperation = 'source-over';
       ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
       ctx.globalCompositeOperation = 'destination-out';
-      ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
+      radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
     });
   </script>
 
 </body>
 </html>
-
