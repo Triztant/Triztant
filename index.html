@@ -292,6 +292,18 @@
   </script>
 
   <script>
+    // Reset all image rows to start from the left on every load
+    function resetScrolls() {
+      document.querySelectorAll('.image-row').forEach(function(row) {
+        row.scrollLeft = 0;
+      });
+    }
+    // Run immediately and again after everything is fully loaded
+    resetScrolls();
+    window.addEventListener('load', resetScrolls);
+  </script>
+
+  <script>
     var dpr = window.devicePixelRatio || 1;
     var canvas = document.getElementById('scratchCanvas');
     var ctx = canvas.getContext('2d');
@@ -360,4 +372,3 @@
 
 </body>
 </html>
-
