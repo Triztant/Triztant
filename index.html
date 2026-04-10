@@ -322,25 +322,42 @@
     canvas.style.height = window.innerHeight + 'px';
     ctx.scale(dpr, dpr);
 
-    ctx.fillStyle = '#03910F';
-    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    if (!('ontouchstart' in window) && !(navigator.maxTouchPoints > 0)) {
+      ctx.fillStyle = '#03910F';
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+
+    // Only show scratch cover on non-touch (desktop) devices
+    var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
     var cover = new Image();
-    cover.onload = function() {
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
-      ctx.globalCompositeOperation = 'destination-out';
-    };
-    cover.src = 'ct3.png';
+    if (!isTouch) {
+      cover.onload = function() {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
+        ctx.globalCompositeOperation = 'destination-out';
+      };
+      cover.src = 'ct3.png';
+    } else {
+      // On mobile: clear the green fill so page is visible immediately
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
 
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
     ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
 
-    var lastX = 0, lastY = 0, scheduled = false, currentX = 0, currentY = 0;
+    var lastX = null, lastY = null, scheduled = false, currentX = 0, currentY = 0;
 
     function draw() {
+      // Skip if we don't have a previous point yet — prevents line from corner
+      if (lastX === null) {
+        lastX = currentX;
+        lastY = currentY;
+        scheduled = false;
+        return;
+      }
       ctx.beginPath();
       ctx.moveTo(lastX, lastY);
       ctx.lineTo(currentX, currentY);
@@ -354,8 +371,8 @@
     document.addEventListener('pointermove', function(e) {
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
-      lastX = currentX || e.clientX;
-      lastY = currentY || e.clientY;
+      lastX = currentX !== 0 ? currentX : null;
+      lastY = currentY !== 0 ? currentY : null;
       currentX = e.clientX;
       currentY = e.clientY;
       if (!scheduled) {
@@ -363,6 +380,16 @@
         requestAnimationFrame(draw);
       }
     }, { passive: true });
+
+    // Reset last position when cursor leaves window so no line on re-entry
+    document.addEventListener('pointerleave', function() {
+      lastX = null;
+      lastY = null;
+    });
+    document.addEventListener('pointerenter', function() {
+      lastX = null;
+      lastY = null;
+    });
 
     window.addEventListener('resize', function() {
       canvas.width = window.innerWidth * dpr;
@@ -373,6 +400,36 @@
       ctx.scale(dpr, dpr);
       ctx.fillStyle = '#03910F';
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
+    });
+
+    // Redraw cover when returning to tab or app
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
+      }
+    });
+
+    // On mobile, redraw when coming back from background
+    window.addEventListener('pageshow', function() {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
       ctx.globalCompositeOperation = 'destination-out';
       ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
     });
