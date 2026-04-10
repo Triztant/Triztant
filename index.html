@@ -26,12 +26,11 @@
       position: fixed;
       width: 10px;
       height: 10px;
-      background: white;
+      background: black;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 99999;
       transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
     }
     @font-face {
       font-family: 'Affairs Regular';
@@ -84,13 +83,6 @@
       width: 100%;
       min-height: 100%;
       background-color: transparent;
-    }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 50;
-      pointer-events: none;
     }
     .project {
       margin: 40px 0;
@@ -152,9 +144,35 @@
     }
     .site-footer p { margin: 0; font-size: 10px; }
     .site-footer a { color: inherit; text-decoration: underline; }
+
+    /* Loader overlay */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 9000;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease;
+    }
+    #loader img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0; left: 0;
+    }
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+  <div id="loader">
+    <img src="ct3.png" alt="" />
+  </div>
   <div id="custom-cursor"></div>
 
   <header class="top-bar">
@@ -411,3 +429,4 @@
 
 </body>
 </html>
+
