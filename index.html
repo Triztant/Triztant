@@ -17,6 +17,10 @@
   <link rel="preload" href="PREMFTBL FORMATTED1_03.png" as="image" />
   <link rel="preload" href="INTRO_2000x1334_HD.gif" as="image" />
   <link rel="preload" href="SOMMAIRE_INSTAGRAM _HD.gif" as="image" />
+  <script>
+    // Disable browser scroll restoration so it never jumps to a remembered position
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  </script>
   <style>
     #custom-cursor {
       position: fixed;
@@ -114,6 +118,7 @@
       -webkit-overflow-scrolling: touch;
       gap: 10px;
       scroll-snap-type: x mandatory;
+      scroll-behavior: auto;
       scrollbar-width: none;
       margin-top: 10px;
       padding-bottom: 20px;
@@ -292,15 +297,18 @@
   </script>
 
   <script>
-    // Reset all image rows to start from the left on every load
     function resetScrolls() {
       document.querySelectorAll('.image-row').forEach(function(row) {
         row.scrollLeft = 0;
       });
     }
-    // Run immediately and again after everything is fully loaded
+    // Hit it at every possible moment the browser might restore scroll
     resetScrolls();
+    document.addEventListener('DOMContentLoaded', resetScrolls);
     window.addEventListener('load', resetScrolls);
+    // Also after a tick in case snap/restore happens async
+    setTimeout(resetScrolls, 0);
+    setTimeout(resetScrolls, 100);
   </script>
 
   <script>
@@ -372,3 +380,4 @@
 
 </body>
 </html>
+
