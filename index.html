@@ -11,7 +11,12 @@
     gtag('js', new Date());
     gtag('config', 'G-P88NM5DB7P');
   </script>
- <link rel="preload" href="ct3.png" as="image" />
+  <link rel="preload" href="ct3.png" as="image" />
+  <link rel="preload" href="PREMFTBL FORMATTED1_16.png" as="image" />
+  <link rel="preload" href="PREMFTBL FORMATTED1_08.png" as="image" />
+  <link rel="preload" href="PREMFTBL FORMATTED1_03.png" as="image" />
+  <link rel="preload" href="INTRO_2000x1334_HD.gif" as="image" />
+  <link rel="preload" href="SOMMAIRE_INSTAGRAM _HD.gif" as="image" />
   <style>
     #custom-cursor {
       position: fixed;
@@ -112,8 +117,8 @@
       scrollbar-width: none;
       margin-top: 10px;
       padding-bottom: 20px;
+      padding-left: 20px;
       align-items: flex-start;
-      justify-content: flex-start;
     }
     .image-row::-webkit-scrollbar {
       display: none;
@@ -158,6 +163,7 @@
 
   <div id="portfolio">
 
+    <!-- SECTION 1: eager load first 3 images -->
     <section class="project">
       <div class="project-info">
         <h2>Premftbl</h2>
@@ -165,43 +171,45 @@
           Created consistent, branded templates to maintain visual cohesion across all posts and ensure a recognisable identity.</p>
       </div>
       <div class="image-row">
-        <img src="PREMFTBL FORMATTED1_16.png" />
-        <img src="PREMFTBL FORMATTED1_08.png" />
-        <img src="PREMFTBL FORMATTED1_03.png" />
-        <img src="PREMFTBL FORMATTED1_36.png" />
-        <img src="PREMFTBL FORMATTED1_12.png" />
-        <img src="PREMFTBL FORMATTED1_15.png" />
-        <img src="PREMFTBL FORMATTED1_02.png" />
-        <img src="PREMFTBL FORMATTED1_01.png" />
-        <img src="PREMFTBL FORMATTED1_27.png" />
-        <img src="PREMFTBL FORMATTED1_31.png" />
-        <img src="PREMFTBL FORMATTED1_21.png" />
-        <img src="PREMFTBL FORMATTED1_19.png" />
+        <img src="PREMFTBL FORMATTED1_16.png" loading="eager" />
+        <img src="PREMFTBL FORMATTED1_08.png" loading="eager" />
+        <img src="PREMFTBL FORMATTED1_03.png" loading="eager" />
+        <img src="PREMFTBL FORMATTED1_36.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_12.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_15.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_02.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_01.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_27.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_31.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_21.png" loading="lazy" />
+        <img src="PREMFTBL FORMATTED1_19.png" loading="lazy" />
       </div>
     </section>
 
+    <!-- SECTION 2: eager load first 2 images -->
     <section class="project">
       <div class="project-info">
         <h2>L&#39;Equipe</h2>
         <p>Working with L&#39;Equipe to create an animated system that showcases the typography. A flexible, motion-led identity with type at the core.</p>
       </div>
       <div class="image-row">
-        <img src="INTRO_2000x1334_HD.gif" />
-        <img src="SOMMAIRE_INSTAGRAM _HD.gif" />
-        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_3.jpg" />
-        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_5.jpg" />
-        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_10.jpg" />
+        <img src="INTRO_2000x1334_HD.gif" loading="eager" />
+        <img src="SOMMAIRE_INSTAGRAM _HD.gif" loading="eager" />
+        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_3.jpg" loading="lazy" />
+        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_5.jpg" loading="lazy" />
+        <img src="2026_D&amp;AD_TYPE_DESIGN_LETTERING_10.jpg" loading="lazy" />
       </div>
     </section>
 
+    <!-- ALL REMAINING SECTIONS: fully lazy -->
     <section class="project">
       <div class="project-info">
         <h2>Mooose Skin Care</h2>
         <p>Working with Mooose Skincare to develop a full visual identity and motion system for launch. The outcome is a clear and flexible system, with simple, structured visuals and motion.</p>
       </div>
       <div class="image-row">
-        <img src="ALL_LOGOS_BRANDBLOCK_ZOOM_OUT.gif" />
-        <img src="WORDMARK_CONSTRUCTION copie.gif" />
+        <img src="ALL_LOGOS_BRANDBLOCK_ZOOM_OUT.gif" loading="lazy" />
+        <img src="WORDMARK_CONSTRUCTION copie.gif" loading="lazy" />
       </div>
     </section>
 
@@ -212,13 +220,12 @@
           language and applying it across all aspects of the brand.</p>
       </div>
       <div class="image-row">
-        <img src="MSUME_ANIAMTION2.gif" />
-        <img src="POSTER.png" />
-        <img src="SIGN5.png" />
-        <img src="MUSUEM_WAYFINDING.png" />
-        <img src="MUSUEM_WAYFDING_2.png" />
-        <img src="SIGN1.png" />
-    
+        <img src="MSUME_ANIAMTION2.gif" loading="lazy" />
+        <img src="POSTER.png" loading="lazy" />
+        <img src="SIGN5.png" loading="lazy" />
+        <img src="MUSUEM_WAYFINDING.png" loading="lazy" />
+        <img src="MUSUEM_WAYFDING_2.png" loading="lazy" />
+        <img src="SIGN1.png" loading="lazy" />
       </div>
     </section>
 
@@ -228,13 +235,14 @@
         <p>Campaign for a company raising awareness of the carbon impact of websites, showing how design choices like images, colours, and fonts affect online emissions.</p>
       </div>
       <div class="image-row">
-        <img src="aniamted3INTRO.gif" />
-        <img src="Comp 1.gif" />
-        <img src="Comp 2.gif" />
-        <img src="Comp 3.gif" />
-        <img src="Fn.resources_Poster 01.png" />
+        <img src="aniamted3INTRO.gif" loading="lazy" />
+        <img src="Comp 1.gif" loading="lazy" />
+        <img src="Comp 2.gif" loading="lazy" />
+        <img src="Comp 3.gif" loading="lazy" />
+        <img src="Fn.resources_Poster 01.png" loading="lazy" />
       </div>
     </section>
+
     <section class="project">
       <div class="project-info">
         <h2>Seasonal Living</h2>
@@ -242,11 +250,11 @@
           the book encourages nurturing vegetables with care and attention, reminding us that some things can&#39;t be rushed.</p>
       </div>
       <div class="image-row">
-        <img src="SEASON_LIVING_WEBSITE_ANIMATION.gif" />
-        <img src="2-2LOW.jpg" />
-         <img src="fcef4cac-2a59-4879-b13d-893de2f60f71.JPG" />
-        <img src="2-3low.jpg" />
-        <img src="2-1LOW.jpg" />
+        <img src="SEASON_LIVING_WEBSITE_ANIMATION.gif" loading="lazy" />
+        <img src="2-2LOW.jpg" loading="lazy" />
+        <img src="fcef4cac-2a59-4879-b13d-893de2f60f71.JPG" loading="lazy" />
+        <img src="2-3low.jpg" loading="lazy" />
+        <img src="2-1LOW.jpg" loading="lazy" />
       </div>
     </section>
 
@@ -258,11 +266,11 @@
           Rather than imposing on them, the text shifts and flows around each dot, acknowledging the trees as steadfast, immovable presences within the design.</p>
       </div>
       <div class="image-row">
-        <img src="ICPLARGE.png" />
-        <img src="ICP4.png" />
-        <img src="ICP3.png" />
-        <img src="ICP1png.png" />
-        <img src="ICP2.png" />
+        <img src="ICPLARGE.png" loading="lazy" />
+        <img src="ICP4.png" loading="lazy" />
+        <img src="ICP3.png" loading="lazy" />
+        <img src="ICP1png.png" loading="lazy" />
+        <img src="ICP2.png" loading="lazy" />
       </div>
     </section>
 
@@ -278,7 +286,6 @@
   <canvas id="scratchCanvas"></canvas>
 
   <script>
-    // Set email links via JS so Cloudflare never sees the address in HTML
     var e = 'rtcasper14' + '@' + 'gmail.com';
     document.getElementById('emaillink').href = 'mailto:' + e;
     document.getElementById('emaillink2').href = 'mailto:' + e;
@@ -289,19 +296,15 @@
     var canvas = document.getElementById('scratchCanvas');
     var ctx = canvas.getContext('2d');
 
-    // Size canvas immediately
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = window.innerWidth + 'px';
     canvas.style.height = window.innerHeight + 'px';
     ctx.scale(dpr, dpr);
 
-    // Step 1: fill green instantly — zero wait
     ctx.fillStyle = '#03910F';
     ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
-    // Step 2: draw ct2.png on top as soon as it loads (it's tiny so near-instant)
-    // PNG is already cached by browser from <link rel=preload> in <head>
     var cover = new Image();
     cover.onload = function() {
       ctx.globalCompositeOperation = 'source-over';
@@ -310,7 +313,6 @@
     };
     cover.src = 'ct3.png';
 
-    // Scratch is active immediately — even before PNG loads the green is scratchable
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
@@ -356,9 +358,6 @@
     });
   </script>
 
-  <script>
-    document.querySelectorAll('img').forEach(function(img) { img.loading = 'lazy'; });
-  </script>
 </body>
 </html>
 
