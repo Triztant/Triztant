@@ -153,6 +153,46 @@
     @media (pointer: coarse) {
       #scratchCanvas { display: none !important; }
     }
+    <img id="dvd" src="HEADSHOT.png" />
+
+<style>
+  #dvd {
+    position: fixed;
+    width: 8vw; /* scales with screen size */
+    max-width: 120px;
+    min-width: 60px;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  const dvd = document.getElementById("dvd");
+
+  let x = 100;
+  let y = 100;
+
+  let dx = 2; // speed X
+  let dy = 2; // speed Y
+
+  function animate() {
+    const rect = dvd.getBoundingClientRect();
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    x += dx;
+    y += dy;
+
+    // Bounce on edges
+    if (x + rect.width >= screenWidth || x <= 0) dx *= -1;
+    if (y + rect.height >= screenHeight || y <= 0) dy *= -1;
+
+    dvd.style.transform = `translate(${x}px, ${y}px)`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
   </style>
 </head>
 <body>
