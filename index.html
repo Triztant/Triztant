@@ -77,6 +77,14 @@
       font-family: 'Affairs Regular', sans-serif;
       cursor: none;
     }
+    #dvd {
+  position: fixed;
+  width: 8vw;
+  max-width: 120px;
+  min-width: 60px;
+  pointer-events: none;
+  z-index: 9999;
+}
     #portfolio {
       position: relative;
       width: 100%;
@@ -153,6 +161,7 @@
    </style>
 </head>
 <body>
+  <img id="dvd" src="HEADSHOT.png" />
   <canvas id="scratchCanvas"></canvas>
   <div id="custom-cursor"></div>
 
@@ -166,6 +175,7 @@
   </header>
 
   <div id="portfolio">
+    
 
     <!-- SECTION 1: eager load first 3 images -->
     <section class="project">
@@ -407,6 +417,32 @@
       radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
     });
   </script>
+<script>
+  const dvd = document.getElementById("dvd");
 
+  let x = 100;
+  let y = 100;
+
+  let dx = 2;
+  let dy = 2;
+
+  function animate() {
+    const rect = dvd.getBoundingClientRect();
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    x += dx;
+    y += dy;
+
+    if (x + rect.width >= screenWidth || x <= 0) dx *= -1;
+    if (y + rect.height >= screenHeight || y <= 0) dy *= -1;
+
+    dvd.style.transform = `translate(${x}px, ${y}px)`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
 </body>
 </html>
