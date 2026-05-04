@@ -323,94 +323,99 @@
     canvas.style.height = window.innerHeight + 'px';
     ctx.scale(dpr, dpr);
 
-    if (!('ontouchstart' in window) && !(navigator.maxTouchPoints > 0)) {
-      ctx.fillStyle = '#03910F';
-      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    }
-
-    // Only show scratch cover on non-touch (desktop) devices
+    // Detect touch/mobile devices once — used throughout
     var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-    var cover = new Image();
     if (!isTouch) {
+      // Desktop only: draw the green cover
+      ctx.fillStyle = '#03910F';
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+      var cover = new Image();
+      var coverLoaded = false;
       cover.onload = function() {
+        coverLoaded = true;
         ctx.globalCompositeOperation = 'source-over';
         ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
         ctx.globalCompositeOperation = 'destination-out';
       };
+      cover.onerror = function() { coverLoaded = false; };
       cover.src = 'ct3.png';
-    } else {
-      // On mobile: clear the green fill so page is visible immediately
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    }
 
-    ctx.globalCompositeOperation = 'destination-out';
-
-    var currentX = 0, currentY = 0, scheduled = false;
-    var radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
-
-    function draw() {
-      ctx.beginPath();
-      ctx.arc(currentX, currentY, radius, 0, Math.PI * 2);
-      ctx.fill();
-      scheduled = false;
-    }
-
-    var customCursor = document.getElementById('custom-cursor');
-    document.addEventListener('pointermove', function(e) {
-      customCursor.style.left = e.clientX + 'px';
-      customCursor.style.top = e.clientY + 'px';
-      currentX = e.clientX;
-      currentY = e.clientY;
-      if (!scheduled) {
-        scheduled = true;
-        requestAnimationFrame(draw);
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', function() {
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-      ctx.fillStyle = '#03910F';
-      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
       ctx.globalCompositeOperation = 'destination-out';
-      radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
-    });
 
-    // Redraw cover when returning to tab or app
-    document.addEventListener('visibilitychange', function() {
-      if (document.visibilityState === 'visible') {
+      var currentX = 0, currentY = 0, scheduled = false;
+      var radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
+
+      function draw() {
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, radius, 0, Math.PI * 2);
+        ctx.fill();
+        scheduled = false;
+      }
+
+      var customCursor = document.getElementById('custom-cursor');
+      document.addEventListener('pointermove', function(e) {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
+        currentX = e.clientX;
+        currentY = e.clientY;
+        if (!scheduled) {
+          scheduled = true;
+          requestAnimationFrame(draw);
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', function() {
         canvas.width = window.innerWidth * dpr;
         canvas.height = window.innerHeight * dpr;
         canvas.style.width = window.innerWidth + 'px';
         canvas.style.height = window.innerHeight + 'px';
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
+        ctx.fillStyle = '#03910F';
+        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
         ctx.globalCompositeOperation = 'destination-out';
-        ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
-      }
-    });
+        radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
+      });
 
-    // On mobile, redraw when coming back from background
-    window.addEventListener('pageshow', function() {
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
-      ctx.globalCompositeOperation = 'destination-out';
-      radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
-    });
+      // Redraw cover when returning to tab
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+          canvas.width = window.innerWidth * dpr;
+          canvas.height = window.innerHeight * dpr;
+          canvas.style.width = window.innerWidth + 'px';
+          canvas.style.height = window.innerHeight + 'px';
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.scale(dpr, dpr);
+          if (coverLoaded) {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
+            ctx.globalCompositeOperation = 'destination-out';
+          }
+          ctx.lineWidth = Math.min(window.innerWidth, window.innerHeight) * 1.6;
+        }
+      });
+
+      window.addEventListener('pageshow', function() {
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+        if (coverLoaded) {
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.drawImage(cover, 0, 0, window.innerWidth, window.innerHeight);
+          ctx.globalCompositeOperation = 'destination-out';
+        }
+        radius = Math.min(window.innerWidth, window.innerHeight) * 0.30;
+      });
+
+    } else {
+      // Mobile/touch: canvas stays fully transparent, gimmick disabled
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
   </script>
-</script>
 </body>
 </html>
